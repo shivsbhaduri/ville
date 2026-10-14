@@ -6,7 +6,7 @@ Classical confidence intervals and p-values assume a sample size fixed in advanc
 
 The package is named after Jean Ville, whose maximal inequality for nonnegative supermartingales (Ville 1939) underlies all of the methods.
 
-![Daily peeking at a z test against a confidence sequence](docs/figures/peeking.png)
+![Daily peeking at a z test against a confidence sequence](https://raw.githubusercontent.com/shivsbhaduri/ville/main/docs/figures/peeking.png)
 
 *Figure 1. Cumulative false positive rate over 4,000 simulated A/B tests with no true effect, analysed once per day for 30 days. Two sample z test at α = 0.05: 29.4% by day 30. `ville.AsymptoticABTest` at the same looks: 1.6%. Script: [`benchmarks/peeking.py`](https://github.com/shivsbhaduri/ville/blob/main/benchmarks/peeking.py).*
 
@@ -436,7 +436,7 @@ The confidence sequence controls the error rate at 5% under monitoring after eve
 
 ### Width
 
-![Width of 95% confidence sequences for a bounded mean](docs/figures/widths.png)
+![Width of 95% confidence sequences for a bounded mean](https://raw.githubusercontent.com/shivsbhaduri/ville/main/docs/figures/widths.png)
 
 Average width over 40 streams of Beta(2, 5) data (support $[0, 1]$, standard deviation 0.16).
 
@@ -451,7 +451,7 @@ Without variance information (`GaussianMixtureCS` with the Hoeffding scale) the 
 
 ### Time to a decision
 
-![When ville.AsymptoticABTest stops on real effects](docs/figures/stopping.png)
+![When ville.AsymptoticABTest stops on real effects](https://raw.githubusercontent.com/shivsbhaduri/ville/main/docs/figures/stopping.png)
 
 A fixed horizon z test sized for 80% power at an effect of 0.05 needs 12,559 users. The confidence sequence is monitored after every user, with `t_opt` set to the same horizon.
 
