@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ville"
+version = "0.1.0"
+description = "Anytime valid inference in Python: confidence sequences, e-processes and e-values"
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [{ name = "Shiv Bhaduri", email = "shiv.bhaduri@gmail.com" }]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "scipy>=1.10"]
+keywords = ["sequential testing", "confidence sequences", "e-values", "a/b testing", "anytime valid"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+
+[project.optional-dependencies]
+examples = ["matplotlib>=3.7"]
+test = ["pytest>=7"]
+
+[project.urls]
+Homepage = "https://github.com/shivsbhaduri/ville"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ville"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
