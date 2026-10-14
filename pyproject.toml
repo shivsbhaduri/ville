@@ -26,6 +26,8 @@ test = ["pytest>=7"]
 
 [project.urls]
 Homepage = "https://github.com/shivsbhaduri/ville"
+Source = "https://github.com/shivsbhaduri/ville"
+Issues = "https://github.com/shivsbhaduri/ville/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["ville"]

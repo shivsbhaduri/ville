@@ -6,9 +6,9 @@ A classical confidence interval or p-value carries its guarantee only if the sam
 
 The methods in `ville` give guarantees that hold **simultaneously at every sample size**. You can monitor continuously, stop as soon as the evidence is clear, or keep going if it is not, and the error rate stays where you set it. The library is named after Jean Ville, whose 1939 inequality is the result every method here rests on.
 
-![Daily peeking at a z test against a confidence sequence](docs/figures/peeking.png)
+![Daily peeking at a z test against a confidence sequence](https://raw.githubusercontent.com/shivsbhaduri/ville/main/docs/figures/peeking.png)
 
-*4,000 simulated A/B tests with no true effect, each checked once a day for 30 days. A z test at 5% declares a winner in 29% of them by the end. `ville.AsymptoticABTest`, checked at the same times, stays well under 5%. Script: [`benchmarks/peeking.py`](benchmarks/peeking.py).*
+*4,000 simulated A/B tests with no true effect, each checked once a day for 30 days. A z test at 5% declares a winner in 29% of them by the end. `ville.AsymptoticABTest`, checked at the same times, stays well under 5%. Script: [`benchmarks/peeking.py`](https://github.com/shivsbhaduri/ville/blob/main/benchmarks/peeking.py).*
 
 ## Contents
 
@@ -26,12 +26,16 @@ The methods in `ville` give guarantees that hold **simultaneously at every sampl
 
 ## Installation
 
-`ville` is not on PyPI yet. Install it from a clone:
+```bash
+pip install ville
+```
+
+To work on the code, install from a clone instead:
 
 ```bash
 git clone https://github.com/shivsbhaduri/ville.git
 cd ville
-pip install -e .
+pip install -e ".[test,examples]"
 ```
 
 It needs Python 3.10 or later, NumPy and SciPy. Matplotlib is only needed to redraw the figures.
@@ -57,7 +61,7 @@ for t in (5000, 10_000, 20_000, n):
 print(test.stopping_time())
 ```
 
-Output from [`examples/conversion_rate.py`](examples/conversion_rate.py):
+Output from [`examples/conversion_rate.py`](https://github.com/shivsbhaduri/ville/blob/main/examples/conversion_rate.py):
 
 ```text
 Control conversion rate
@@ -313,7 +317,7 @@ and $e_{[k]}$ is the $k$-th largest. It controls the false discovery rate at $\a
 
 ## Worked examples
 
-All examples are in [`examples/`](examples/). The outputs below are from running them as they are.
+All examples are in [`examples/`](https://github.com/shivsbhaduri/ville/tree/main/examples/). The outputs below are from running them as they are.
 
 ### Revenue per visitor: an unbounded, skewed metric
 
@@ -413,7 +417,7 @@ Rejected by BH on p = 1/e at 10%: [0, 1, 2, 3]
 
 ## Benchmarks
 
-Each figure is produced by a script in [`benchmarks/`](benchmarks/) with a fixed seed.
+Each figure is produced by a script in [`benchmarks/`](https://github.com/shivsbhaduri/ville/tree/main/benchmarks/) with a fixed seed.
 
 ### False positives under peeking
 
@@ -432,7 +436,7 @@ The confidence sequence would stay under 5% even if it were checked after every 
 
 ### Width
 
-![Width of 95% confidence sequences for a bounded mean](docs/figures/widths.png)
+![Width of 95% confidence sequences for a bounded mean](https://raw.githubusercontent.com/shivsbhaduri/ville/main/docs/figures/widths.png)
 
 Average width over 40 streams of Beta(2, 5) data, which live on $[0, 1]$ with a standard deviation of 0.16.
 
@@ -447,7 +451,7 @@ Three things stand out. Bounds alone (`GaussianMixtureCS` with the Hoeffding sca
 
 ### Time to a decision
 
-![When ville.AsymptoticABTest stops on real effects](docs/figures/stopping.png)
+![When ville.AsymptoticABTest stops on real effects](https://raw.githubusercontent.com/shivsbhaduri/ville/main/docs/figures/stopping.png)
 
 A fixed horizon z test sized for 80% power at an effect of 0.05 needs 12,559 users. The confidence sequence is monitored after every user, tuned to the same horizon.
 
@@ -516,7 +520,7 @@ Other packages cover parts of this area. [confseq](https://github.com/gostevehow
 
 ## Licence
 
-BSD 3-Clause. See [LICENSE](LICENSE).
+BSD 3-Clause. See [LICENSE](https://github.com/shivsbhaduri/ville/blob/main/LICENSE).
 
 ## Author
 
