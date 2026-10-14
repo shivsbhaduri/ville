@@ -77,14 +77,17 @@ class ConfidenceSequence:
 
     @property
     def estimate_(self):
+        """Point estimate after each observation."""
         return _join(self._est)
 
     @property
     def lower_(self):
+        """Lower bound after each observation."""
         return _join(self._lo)
 
     @property
     def upper_(self):
+        """Upper bound after each observation."""
         return _join(self._hi)
 
     def interval(self):
@@ -126,10 +129,12 @@ class SequentialTest:
         raise NotImplementedError
 
     def fit(self, x):
+        """Process a whole stream from scratch."""
         self._clear()
         return self.update(x)
 
     def update(self, x):
+        """Add one or more observations to the stream."""
         x = as_stream(x)
         if x.size == 0:
             return self
@@ -139,10 +144,12 @@ class SequentialTest:
 
     @property
     def log_e_values_(self):
+        """Log of the e-process after each observation."""
         return _join(self._log_e)
 
     @property
     def e_values_(self):
+        """The e-process after each observation."""
         return np.exp(self.log_e_values_)
 
     @property
@@ -159,6 +166,7 @@ class SequentialTest:
 
     @property
     def rejected_(self):
+        """Whether the e-process has reached 1/alpha at any time so far."""
         return self.stopping_time() is not None
 
     def __repr__(self):

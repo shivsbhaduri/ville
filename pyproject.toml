@@ -17,6 +17,10 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
 
@@ -26,6 +30,7 @@ test = ["pytest>=7"]
 
 [project.urls]
 Homepage = "https://github.com/shivsbhaduri/ville"
+Documentation = "https://shivsbhaduri.github.io/ville/"
 Source = "https://github.com/shivsbhaduri/ville"
 Issues = "https://github.com/shivsbhaduri/ville/issues"
 

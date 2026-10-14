@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "ville: anytime valid inference in Python"
+abstract: >-
+  Confidence sequences, sequential tests and e-values for means,
+  proportions, quantiles, variances and A/B tests, with error guarantees
+  that hold uniformly over time.
+authors:
+  - family-names: Bhaduri
+    given-names: Shiv
+    email: shiv.bhaduri@gmail.com
+version: 0.1.0
+date-released: 2026-10-14
+license: BSD-3-Clause
+repository-code: "https://github.com/shivsbhaduri/ville"
+url: "https://shivsbhaduri.github.io/ville/"
+keywords:
+  - sequential testing
+  - confidence sequences
+  - e-values
+  - anytime valid inference
+  - A/B testing
+  - statistics

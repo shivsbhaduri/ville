@@ -1,0 +1,88 @@
+site_name: ville
+site_description: Anytime valid inference in Python
+site_author: Shiv Bhaduri
+site_url: https://shivsbhaduri.github.io/ville/
+repo_url: https://github.com/shivsbhaduri/ville
+repo_name: shivsbhaduri/ville
+edit_uri: ""
+copyright: Copyright &copy; 2026 Shiv Bhaduri
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+            show_source: false
+            show_root_heading: true
+            show_root_full_path: false
+            show_signature_annotations: false
+            separate_signature: false
+            members_order: source
+            inherited_members: true
+            filters: ["!^_"]
+            heading_level: 2
+
+nav:
+  - Home: index.md
+  - Quick start: quickstart.md
+  - Mathematics: mathematics.md
+  - Worked examples: examples.md
+  - Benchmarks: benchmarks.md
+  - Choosing a method: choosing.md
+  - API reference:
+      - Means: api/means.md
+      - Proportions: api/proportions.md
+      - Quantiles and variances: api/quantiles.md
+      - A/B tests: api/ab.md
+      - Sequential tests: api/sequential.md
+      - E-values: api/evalues.md
+      - Simulation: api/simulate.md
+      - Base classes and boundaries: api/base.md
+  - References: references.md

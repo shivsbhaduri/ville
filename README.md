@@ -1,6 +1,12 @@
 # ville
 
-Confidence sequences, sequential tests and e-values for anytime valid inference in Python.
+[![PyPI](https://img.shields.io/pypi/v/ville)](https://pypi.org/project/ville/)
+[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://pypi.org/project/ville/)
+[![Tests](https://github.com/shivsbhaduri/ville/actions/workflows/tests.yml/badge.svg)](https://github.com/shivsbhaduri/ville/actions/workflows/tests.yml)
+[![Docs](https://github.com/shivsbhaduri/ville/actions/workflows/docs.yml/badge.svg)](https://shivsbhaduri.github.io/ville/)
+[![Licence](https://img.shields.io/github/license/shivsbhaduri/ville)](https://github.com/shivsbhaduri/ville/blob/main/LICENSE)
+
+Confidence sequences, sequential tests and e-values for anytime valid inference in Python. Documentation: [shivsbhaduri.github.io/ville](https://shivsbhaduri.github.io/ville/).
 
 Classical confidence intervals and p-values assume a sample size fixed in advance and a single analysis. Under repeated analysis of accumulating data (continuous monitoring, interim looks, optional stopping) the type I error rate exceeds the nominal level. The methods implemented here control error rates uniformly over time: the coverage and type I error guarantees hold simultaneously for all sample sizes, so the data may be monitored continuously and the experiment stopped or extended at any point.
 
