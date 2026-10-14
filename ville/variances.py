@@ -9,9 +9,9 @@ class VarianceCS(ConfidenceSequence):
 
     Consecutive pairs give Y_k = (X_2k - X_2k-1)^2 / 2, which has mean
     sigma^2 and lies in [0, (b - a)^2 / 2]. A betting confidence sequence on
-    the Y_k is therefore one for sigma^2. Simple and valid, though it spends
-    half the information a full U-statistic would use. The bound is also
-    capped at (b - a)^2 / 4, the largest variance possible on [a, b].
+    the Y_k is therefore one for sigma^2. Exactly valid, but uses half the
+    information of a full U-statistic. The upper bound is capped at
+    (b - a)^2 / 4, the maximum variance on [a, b].
     """
 
     def __init__(self, bounds=(0.0, 1.0), alpha=0.05, grid=10_000, intersect=True):

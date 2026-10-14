@@ -14,8 +14,7 @@ class MSPRT(SequentialTest):
     alternative,
         Lambda_t = sqrt(sigma^2 / (sigma^2 + t tau^2))
                    * exp(t^2 tau^2 (xbar_t - theta0)^2 / (2 sigma^2 (sigma^2 + t tau^2))).
-    If tau is not given it is chosen to make the test most sensitive around
-    t_opt observations.
+    If tau is None it is set from t_opt.
     """
 
     def __init__(self, theta0=0.0, sigma=1.0, tau=None, alpha=0.05, t_opt=500):
@@ -45,12 +44,12 @@ class MSPRT(SequentialTest):
 class BettingTest(SequentialTest):
     """Betting e-process for the mean of bounded observations.
 
-    Waudby-Smith and Ramdas (2024). Under H0: mean = m0 the wealth
+    Waudby-Smith and Ramdas (2024). Under H0: mean = m0 the capital process
         K_t = prod (1 + lambda_i (X_i - m0))
     is a nonnegative martingale for any predictable lambda_i, so it is an
-    e-process. The two sided test splits capital between an upward and a
-    downward bettor. One sided alternatives keep only one of them, which
-    also makes the test valid for the composite nulls mean <= m0 or >= m0.
+    e-process. The two sided test averages an upward and a downward process.
+    One sided alternatives use one of them and are also valid for the
+    composite nulls mean <= m0 and mean >= m0.
     """
 
     def __init__(self, m0, bounds=(0.0, 1.0), alternative="two-sided",

@@ -9,11 +9,9 @@ class _ABTest:
 
     Each unit is treated with known probability pi. The pseudo outcome
         phi_i = (Y_i - m_{i-1}) * (A_i / pi - (1 - A_i) / (1 - pi))
-    has conditional mean E[Y(1)] - E[Y(0)] whatever the predictable centre
-    m_{i-1} is, so a confidence sequence for the mean of phi is one for the
-    effect. Centring on the running mean of past outcomes removes the
-    variance an uncentred inverse propensity weight would carry when the
-    outcomes have a large baseline.
+    has conditional mean E[Y(1)] - E[Y(0)] for any predictable centre
+    m_{i-1}. The centre is the running mean of past outcomes, which reduces
+    the variance of phi when the outcome mean is far from zero.
     """
 
     def __init__(self, propensity, alpha):
@@ -87,8 +85,7 @@ class _ABTest:
 class AsymptoticABTest(_ABTest):
     """A/B test with an asymptotic confidence sequence (Waudby-Smith et al. 2024).
 
-    Needs no bounds on the outcome, only a finite variance. Validity is
-    asymptotic, like the usual z test.
+    Requires a finite variance; no bounds. Validity is asymptotic.
     """
 
     def __init__(self, alpha=0.05, propensity=0.5, t_opt=500, min_samples=100):
@@ -106,8 +103,7 @@ class AsymptoticABTest(_ABTest):
 class BettingABTest(_ABTest):
     """A/B test for bounded outcomes with a betting confidence sequence.
 
-    Valid at every sample size, not only asymptotically. Suited to conversion
-    rates and other outcomes with known bounds.
+    Nonasymptotic. For conversion rates and other outcomes with known bounds.
     """
 
     def __init__(self, bounds=(0.0, 1.0), alpha=0.05, propensity=0.5, grid=20_000):

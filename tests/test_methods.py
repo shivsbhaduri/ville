@@ -75,8 +75,8 @@ def test_e_processes_have_unit_mean_under_the_null(make, draw):
 
 
 def test_bernoulli_e_value_has_mean_exactly_one():
-    # Monte Carlo cannot see this: the mean is carried by sequences with
-    # probability around 2^-200. Sum over the binomial law instead.
+    # Exact summation over the binomial distribution. Monte Carlo is
+    # unreliable: the mean is dominated by sequences of probability ~2^-200.
     from scipy.stats import binom
     t, p0 = 200, 0.3
     s = np.arange(t + 1)

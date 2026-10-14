@@ -25,7 +25,7 @@ class BernoulliCS(ConfidenceSequence):
     against the point null,
         E_t(p0) = B(a + S_t, b + t - S_t) / B(a, b) / (p0^S_t (1 - p0)^(t - S_t)),
     and the sequence collects every p0 it has not yet rejected (Howard et al.
-    2021). The prior only affects width, never validity.
+    2021). The prior affects width only.
     """
 
     def __init__(self, alpha=0.05, prior=(1.0, 1.0), intersect=True):

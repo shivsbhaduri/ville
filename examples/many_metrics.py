@@ -10,8 +10,8 @@ pairs, metrics = 20_000, 20
 effects = np.zeros(metrics)
 effects[:4] = [0.10, 0.08, 0.06, 0.04]
 
-# Each user has one shock shared by all their metrics, so the twenty
-# e-values are correlated. e-BH does not care.
+# A per user shock shared by all metrics makes the e-values dependent.
+# e-BH is valid under arbitrary dependence.
 shock_t = 0.5 * rng.standard_normal(pairs)
 shock_c = 0.5 * rng.standard_normal(pairs)
 e_values = np.empty(metrics)

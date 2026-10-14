@@ -1,8 +1,7 @@
-"""Time uniform coverage, checked by simulation.
+"""Time uniform coverage by simulation.
 
-A sequence fails a run if it excludes the truth at any time. The failure
-rate must stay below alpha, allowing three standard errors of Monte Carlo
-noise.
+A run fails if the true value is excluded at any time. The failure rate
+must not exceed alpha by more than three Monte Carlo standard errors.
 """
 
 import numpy as np
@@ -55,7 +54,7 @@ def test_quantile(q):
 
 
 def test_quantile_with_atoms():
-    # Half the mass sits on 0, so the median is 0 and ties are everywhere.
+    # Atom of mass 1/2 at 0, so the median is 0 and there are many ties.
     rate = failure_rate(lambda: ville.QuantileCS(q=0.5, alpha=ALPHA),
                         lambda r: np.where(r.random(N) < 0.5, 0.0, r.exponential(1.0, N)), 0.0)
     assert rate <= ALPHA + TOLERANCE

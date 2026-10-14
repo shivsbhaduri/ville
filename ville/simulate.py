@@ -76,7 +76,7 @@ def peeking(n_max=10_000, n_looks=30, n_sims=2000, effect=0.0, alpha=0.05,
 def stopping_times(n_max=10_000, n_sims=2000, effect=0.05, alpha=0.05,
                    t_opt=None, seed=0, batch=200):
     """Monitor after every observation and record when the confidence
-    sequence first excludes zero. np.inf marks runs that never stopped."""
+    sequence first excludes zero. np.inf for runs that did not stop."""
     alpha = check_alpha(alpha)
     rng = np.random.default_rng(seed)
     rho = best_rho(t_opt or n_max // 4, alpha)

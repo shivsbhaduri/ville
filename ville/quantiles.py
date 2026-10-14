@@ -9,13 +9,12 @@ from ._boundaries import best_rho, normal_mixture
 class QuantileCS(ConfidenceSequence):
     """Confidence sequence for the q-quantile of any distribution.
 
-    Follows Howard and Ramdas (2022). The count of observations at or below
-    the true quantile is a sum of Bernoulli(q) variables, so a time uniform
-    boundary u_t for that count pins the quantile between two order
-    statistics:
+    Howard and Ramdas (2022). The number of observations at or below the
+    true quantile is a sum of Bernoulli variables, so a time uniform
+    boundary u_t for that count gives the order statistic bounds
         [ X_(ceil(t q - u_t)),  X_(floor(t q + u_t) + 1) ].
     Here u_t is a one sided normal mixture boundary at alpha / 2 on each
-    side, with the Hoeffding variance 1/4. No assumptions on the
+    side, with the Hoeffding variance 1/4. Valid for any
     distribution, including ties and atoms.
     """
 

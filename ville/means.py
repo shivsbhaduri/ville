@@ -8,7 +8,7 @@ class GaussianMixtureCS(ConfidenceSequence):
     """Confidence sequence for the mean of sigma sub-Gaussian observations.
 
     Uses Robbins' two sided normal mixture boundary (Robbins 1970;
-    Howard et al. 2021). The mixture is tuned to be tightest at t_opt.
+    Howard et al. 2021). The mixing precision minimises the width at t_opt.
 
     Parameters
     ----------
@@ -45,13 +45,9 @@ class GaussianMixtureCS(ConfidenceSequence):
 class AsymptoticCS(ConfidenceSequence):
     """Asymptotic confidence sequence for a mean (Waudby-Smith et al. 2024).
 
-    The time uniform analogue of the CLT interval: valid for any distribution
-    with finite variance once the sample is large, with no bounds or scale
-    needed. It plays the role the z interval plays for fixed n.
-
-    The guarantee is a large sample one, so the interval is left infinite
-    until min_samples observations have arrived. Raise it for heavily
-    skewed data.
+    Time uniform analogue of the CLT interval. Requires a finite variance;
+    no bounds or scale parameter. The guarantee is asymptotic, so the
+    interval is infinite until min_samples observations are available.
     """
 
     def __init__(self, alpha=0.05, t_opt=500, min_samples=100, intersect=False):
@@ -88,8 +84,8 @@ class _PlugIn:
 
     mu_t = (1/2 + sum X_i) / (t + 1)
     var_t = (1/4 + sum (X_i - mu_i)^2) / (t + 1)
-    on data rescaled to [0, 1]. step() returns the values from time t - 1,
-    which are the ones allowed when betting on X_t.
+    on data rescaled to [0, 1]. step() returns the values at time t - 1,
+    i.e. the predictable estimates used for X_t.
     """
 
     def __init__(self):
@@ -177,12 +173,10 @@ class EmpiricalBernsteinCS(_Bounded):
 class BettingCS(_Bounded):
     """Hedged capital confidence sequence for a bounded mean.
 
-    Waudby-Smith and Ramdas (2024), Theorem 3. For each candidate mean m a
-    gambler bets on X > m and another on X < m. A value of m is ruled out once
-    their hedged wealth passes 1/alpha. Usually the tightest method here for
-    bounded data. Wealth is tracked on a grid of candidate means; with
-    intersect on, only the grid points still inside the interval are
-    updated, so the cost falls quickly as the interval shrinks.
+    Waudby-Smith and Ramdas (2024), Theorem 3. A candidate mean m is
+    excluded once the hedged capital process K_t(m) reaches 1/alpha. Capital
+    is tracked on a grid of candidate means; with intersect=True only grid
+    points inside the current interval are updated.
 
     Parameters
     ----------
@@ -190,12 +184,12 @@ class BettingCS(_Bounded):
         Known range of the observations.
     alpha : float
     c : float
-        Bets are capped at c / m and c / (1 - m), keeping wealth positive.
+        Bets are truncated at c / m and c / (1 - m), keeping capital positive.
     theta : float
         Share of capital placed on the upward bet.
     grid : int
-        Number of candidate means. The interval is widened to the neighbouring
-        grid points so the discretisation never makes it anticonservative.
+        Number of candidate means. The interval is widened to the adjacent
+        grid points, so the discretisation is conservative.
     """
 
     def __init__(self, bounds=(0.0, 1.0), alpha=0.05, c=0.5, theta=0.5,
@@ -234,8 +228,8 @@ class BettingCS(_Bounded):
 
         start = 0
         while start < z.size:
-            # With intersect on, grid points outside the running interval can
-            # never come back, so only the surviving window is updated.
+            # Under the running intersection excluded grid points cannot
+            # re-enter, so only the current window is updated.
             a, b = self._alive
             w = slice(a, b + 1)
             sl = slice(start, start + max(1, 2_000_000 // (b - a + 1)))
@@ -251,8 +245,8 @@ class BettingCS(_Bounded):
             any_in = inside.any(axis=1)
             first = np.argmax(inside, axis=1)
             last = inside.shape[1] - 1 - np.argmax(inside[:, ::-1], axis=1)
-            # Nothing on the grid survives: the set sits between the grid
-            # points either side of the least rejected one.
+            # No grid point inside: the set lies between the neighbours of
+            # the grid point with the smallest capital.
             j = np.argmin(log_k, axis=1)
             lo_idx = np.maximum(a + np.where(any_in, first, j) - 1, 0)
             hi_idx = np.minimum(a + np.where(any_in, last, j) + 1, self.grid - 1)
